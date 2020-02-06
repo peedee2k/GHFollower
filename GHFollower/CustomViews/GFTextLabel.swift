@@ -12,7 +12,7 @@ class GFTextLabel: UILabel {
 
     override init(frame: CGRect) {
         super.init(frame: frame)
-        
+        configur()
     }
     
     required init?(coder: NSCoder) {

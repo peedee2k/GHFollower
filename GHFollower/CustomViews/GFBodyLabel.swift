@@ -12,7 +12,7 @@ class GFBodyLabel: UILabel {
 
     override init(frame: CGRect) {
         super.init(frame: frame)
-        
+        configur()
     }
     
     required init?(coder: NSCoder) {
@@ -28,10 +28,13 @@ class GFBodyLabel: UILabel {
     private func configur() {
         translatesAutoresizingMaskIntoConstraints = false
         font                        = UIFont.preferredFont(forTextStyle: .body)
+        adjustsFontSizeToFitWidth   = true
         textColor                   = .secondaryLabel
         lineBreakMode               = .byWordWrapping
         minimumScaleFactor          = 0.75
-        adjustsFontSizeToFitWidth   = true
+        numberOfLines = 0
+        
+        
         
     }
     
