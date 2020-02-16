@@ -32,9 +32,7 @@ class GFBodyLabel: UILabel {
         textColor                   = .secondaryLabel
         lineBreakMode               = .byWordWrapping
         minimumScaleFactor          = 0.75
-        numberOfLines = 0
-        
-        
+        numberOfLines               = 0
         
     }
     
