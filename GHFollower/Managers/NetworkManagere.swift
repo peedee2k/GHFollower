@@ -15,7 +15,7 @@ class NetworkManager {
     
     init() {}
     
-    
+    // Network call to get all the followers
     
     func getFollower(for username: String, page: Int, complited: @escaping  (Result<[Follower], GFError>) -> Void) {
         let endPoint = baseURL + "\(username)/followers?per_page=100&page=\(page)"
@@ -23,6 +23,7 @@ class NetworkManager {
             complited(.failure(.invalidUser))
             return
         }
+
         let task = URLSession.shared.dataTask(with: url) { (data, response, error) in
             if let _ = error {
                 complited(.failure(.unableToComplete))
@@ -46,6 +47,40 @@ class NetworkManager {
                 complited(.failure(.invalidData))
             }
             
+        }
+            task.resume()
+    }
+    
+    // Network call to get User info (Details)
+    func getUser(for username: String, complited: @escaping  (Result<User, GFError>) -> Void) {
+        let endPoint = baseURL + "\(username)"
+        guard let url = URL(string: endPoint) else {
+            complited(.failure(.invalidUser))
+            return
+        }
+    
+        let task = URLSession.shared.dataTask(with: url) { (data, response, error) in
+            if let _ = error {
+                complited(.failure(.unableToComplete))
+                return
+            }
+            guard let response = response as? HTTPURLResponse, response.statusCode == 200 else {
+                complited(.failure(.invalidResponse))
+                return
+            }
+            guard let data = data else  {
+                complited(.failure(.invalidData))
+                return
+            }
+            do {
+                let decoder                     = JSONDecoder()
+                    decoder.keyDecodingStrategy = .convertFromSnakeCase
+                let users                       = try decoder.decode(User.self, from: data)
+                complited(.success(users))
+                }
+            catch {
+                complited(.failure(.invalidData))
+            }
         }
             task.resume()
     }
