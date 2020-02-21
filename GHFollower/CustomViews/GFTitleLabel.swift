@@ -1,5 +1,5 @@
 //
-//  GFTextLabel.swift
+//  GFTitleLabel.swift
 //  GHFollower
 //
 //  Created by Pankaj Sharma on 1/18/20.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class GFTextLabel: UILabel {
+class GFTitleLabel: UILabel {
 
     override init(frame: CGRect) {
         super.init(frame: frame)
